@@ -1,8 +1,12 @@
 import { ref } from "vue";
 
-export const btnValue = ref('');
-export const mathAction = ref('');
-export const mathValue1 = ref('');
-export const mathValue2 = ref('');
-export const mathEqual = ref(0);
-export const mathOutput = ref('');
+export const mathState = {
+    btnValue : ref(''),
+    mathAction : ref(''),
+    mathValue1 : ref(''),
+    mathValue2 : ref(''),
+    mathEqual : ref(0),
+    mathOutput : ref(''),
+}
+
+// export {btnValue}

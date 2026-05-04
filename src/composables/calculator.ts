@@ -1,13 +1,14 @@
-import { btnValue, mathValue1, mathValue2, mathEqual, mathOutput, mathAction } from "../constants";
+// import { btnValue, mathValue1, mathValue2, mathEqual, mathOutput, mathAction } from "../constants";
+import { mathState } from "../constants";
 
 export function btnClick(target: EventTarget | null) {
   if (target && 'value' in target) {
     const val = (target as HTMLInputElement).value
     if (target instanceof HTMLInputElement && target.classList.contains('btn_number')) {
-      if (btnValue.value == '0') {
-        btnValue.value = val;
+      if (mathState.btnValue.value == '0') {
+        mathState.btnValue.value = val;
       } else {
-        btnValue.value += val;
+        mathState.btnValue.value += val;
       }
     }
   }
@@ -26,18 +27,18 @@ export function calculate(a: any, b: any, operator: any) {
 export function btnEqual() {
   const btnNumbers: any = document.querySelectorAll('.btn_number');
 
-  mathValue2.value = btnValue.value;
-  if (mathValue2.value.trim() != '') {
-    mathEqual.value = Number(mathValue1.value) * Number(mathValue2.value);
-    btnValue.value = calculate(Number(mathValue1.value), Number(mathValue2.value), mathAction.value);
+  mathState.mathValue2.value = mathState.btnValue.value;
+  if (mathState.mathValue2.value.trim() != '') {
+    mathState.mathEqual.value = Number(mathState.mathValue1.value) * Number(mathState.mathValue2.value);
+    mathState.btnValue.value = calculate(Number(mathState.mathValue1.value), Number(mathState.mathValue2.value), mathState.mathAction.value);
   } else {
     alert('Пусто!');
   }
 
   disabled(btnNumbers);
 
-  btnValue.value = '';
-  mathOutput.value += `${mathValue2.value}=${calculate(Number(mathValue1.value), Number(mathValue2.value), mathAction.value)}`;
+  mathState.btnValue.value = '';
+  mathState.mathOutput.value += `${mathState.mathValue2.value}=${calculate(Number(mathState.mathValue1.value), Number(mathState.mathValue2.value), mathState.mathAction.value)}`;
 }
 
 function enabled(items:any) {
@@ -65,10 +66,10 @@ export function clickMath(target: EventTarget | null) {
     const val = (target as HTMLInputElement).value
     const btnActions: NodeList = document.querySelectorAll('.math-action');
 
-    mathAction.value = val;
-    mathValue1.value = btnValue.value;
-    btnValue.value = '';
-    mathOutput.value += `${mathValue1.value}${mathAction.value}`;
+    mathState.mathAction.value = val;
+    mathState.mathValue1.value = mathState.btnValue.value;
+    mathState.btnValue.value = '';
+    mathState.mathOutput.value += `${mathState.mathValue1.value}${mathState.mathAction.value}`;
     disabled(btnActions)
   }
 }
@@ -77,14 +78,14 @@ export function clickZero() {
   const btnActions = document.querySelectorAll('.math-action');
   const btnNumbers = document.querySelectorAll('.btn_number');
 
-  btnValue.value = '';
-  mathValue1.value = '';
-  mathValue2.value = '';
+  mathState.btnValue.value = '';
+  mathState.mathValue1.value = '';
+  mathState.mathValue2.value = '';
   enabled(btnActions);
   enabled(btnNumbers);
-  mathOutput.value = ''
+  mathState.mathOutput.value = ''
 }
 
 export function removeNumber() {
-  btnValue.value = btnValue.value.slice(0, btnValue.value.length - 1);
+  mathState.btnValue.value = mathState.btnValue.value.slice(0, mathState.btnValue.value.length - 1);
 }
