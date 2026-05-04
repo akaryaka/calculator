@@ -24,7 +24,7 @@ export function calculate(a: any, b: any, operator: any) {
 }
 
 export function btnEqual() {
-  const btnNumbers = document.querySelectorAll('.btn_number');
+  const btnNumbers: any = document.querySelectorAll('.btn_number');
 
   mathValue2.value = btnValue.value;
   if (mathValue2.value.trim() != '') {
@@ -34,31 +34,43 @@ export function btnEqual() {
     alert('Пусто!');
   }
 
-  btnNumbers.forEach(function (btnNumber) {
-    btnNumber.classList.add('btn-disabled');
-    btnNumber.setAttribute('disabled', 'true');
-  });
+  disabled(btnNumbers);
 
   btnValue.value = '';
   mathOutput.value += `${mathValue2.value}=${calculate(Number(mathValue1.value), Number(mathValue2.value), mathAction.value)}`;
 }
 
+function enabled(items:any) {
+  // Типы!!!
+  items.forEach(function (item: HTMLElement) {
+    item.classList.remove('btn-disabled');
+    item.removeAttribute('disabled');
+  });
+}
+
+function disabled(items:NodeList) {
+  // Типы!!!
+  const itemsArr: HTMLElement[] = Array.from(items)
+
+  itemsArr.forEach(function(item: HTMLElement) {
+    item.classList.add('btn-disabled');
+    item.setAttribute('disabled', 'true');
+  });
+}
+
 export function clickMath(target: EventTarget | null) {
   // переделать? нашел решение в qwen
+  // проверка на наличие события и пустоту value
   if (target && 'value' in target) {
     const val = (target as HTMLInputElement).value
-    const btnActions = document.querySelectorAll('.math-action');
+    const btnActions: NodeList = document.querySelectorAll('.math-action');
 
     mathAction.value = val;
     mathValue1.value = btnValue.value;
     btnValue.value = '';
     mathOutput.value += `${mathValue1.value}${mathAction.value}`;
-    btnActions.forEach(function (btnAction) {
-      btnAction.classList.add('btn-disabled');
-      btnAction.setAttribute('disabled', 'true');
-    });
+    disabled(btnActions)
   }
-
 }
 
 export function clickZero() {
@@ -68,14 +80,8 @@ export function clickZero() {
   btnValue.value = '';
   mathValue1.value = '';
   mathValue2.value = '';
-  btnActions.forEach(function (btnAction) {
-    btnAction.classList.remove('btn-disabled');
-    btnAction.removeAttribute('disabled');
-  });
-  btnNumbers.forEach(function (btnNumber) {
-    btnNumber.classList.remove('btn-disabled');
-    btnNumber.removeAttribute('disabled');
-  });
+  enabled(btnActions);
+  enabled(btnNumbers);
   mathOutput.value = ''
 }
 
