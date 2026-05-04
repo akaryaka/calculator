@@ -1,30 +1,30 @@
 <template>
   <form action="#" class="calc__main">
-    <Button @click="clickZero" class="btn_command" id="btn_zeroing" value="C"/>
-    <Button @click="clickMath" class="math-action" id="btn_percent" :disabled=!btnValue value="%" />
-    <Button @click="clickMath" class="math-action" value="/" />
-    <Button @click="btnClick" class="btn_number" value="7" />
-    <Button @click="btnClick" class="btn_number" value="8" />
-    <Button @click="btnClick" class="btn_number" value="9" />
-    <Button @click="clickMath" class="math-action" value="*" />
-    <Button @click="btnClick" class="btn_number" value="4" />
-    <Button @click="btnClick" class="btn_number" value="5" />
-    <Button @click="btnClick" class="btn_number" value="6" />
-    <Button @click="clickMath" class="math-action" value="-" />
-    <Button @click="btnClick" class="btn_number" value="1" />
-    <Button @click="btnClick" class="btn_number" value="2" />
-    <Button @click="btnClick" class="btn_number" value="3" />
-    <Button @click="clickMath" class="math-action" value="+" />
-    <Button @click="btnClick" class="btn_number" value="0" />
-    <Button @click="btnClick" class="btn_number" value="." />
-    <Button @click="btnEqual" class="equal" id="btn_equal" value="=" />
+    <Button @click="btnClick.clickZero()" class="btn_command" id="btn_zeroing" value="C"/>
+    <Button @click="btnClick.clickMath" class="math-action" id="btn_percent" :disabled=!mathState.btnValue value="%" />
+    <Button @click="btnClick.clickMath" class="math-action" value="/" />
+    <Button @click="btnClick.refValue" class="btn_number" value="7" />
+    <Button @click="btnClick.refValue" class="btn_number" value="8" />
+    <Button @click="btnClick.refValue" class="btn_number" value="9" />
+    <Button @click="btnClick.clickMath" class="math-action" value="*" />
+    <Button @click="btnClick.refValue" class="btn_number" value="4" />
+    <Button @click="btnClick.refValue" class="btn_number" value="5" />
+    <Button @click="btnClick.refValue" class="btn_number" value="6" />
+    <Button @click="btnClick.clickMath" class="math-action" value="-" />
+    <Button @click="btnClick.refValue" class="btn_number" value="1" />
+    <Button @click="btnClick.refValue" class="btn_number" value="2" />
+    <Button @click="btnClick.refValue" class="btn_number" value="3" />
+    <Button @click="btnClick.clickMath" class="math-action" value="+" />
+    <Button @click="btnClick.refValue" class="btn_number" value="0" />
+    <Button @click="btnClick.refValue" class="btn_number" value="." />
+    <Button @click="btnClick.btnEqual()" class="equal" id="btn_equal" value="=" />
   </form>
 </template>
 
 <script setup lang="ts">
   import Button from './Button.vue';
-  import { btnClick, clickMath, clickZero, btnEqual } from '../composables/calculator';
-import { btnValue } from '../constants';
+  import { btnClick } from '../composables/calculator';
+  import { mathState } from '../constants';
 </script>
 
 <style lang="scss" scoped>
