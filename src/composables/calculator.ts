@@ -1,7 +1,7 @@
 import { mathState } from "../constants";
 
-export const btnClick = {
-  refValue(target: EventTarget | null) {
+export class BtnClick {
+  refValue(target: EventTarget | null): void {
     if (target && 'value' in target) {
       const val = (target as HTMLInputElement).value
       if (target instanceof HTMLInputElement && target.classList.contains('btn_number')) {
@@ -12,8 +12,8 @@ export const btnClick = {
         }
       }
     }
-  },
-  btnEqual() {
+  }
+  btnEqual = () => {
     const btnNumbers: any = document.querySelectorAll('.btn_number');
 
     mathState.mathValue2.value = mathState.btnValue.value;
@@ -28,13 +28,13 @@ export const btnClick = {
 
     mathState.btnValue.value = '';
     mathState.mathOutput.value += `${mathState.mathValue2.value}=${calculate(Number(mathState.mathValue1.value), Number(mathState.mathValue2.value), mathState.mathAction.value)}`;
-  },
-  removeNumber() {
+  }
+  removeNumber(): void {
     mathState.btnValue.value = mathState.btnValue.value.slice(0, mathState.btnValue.value.length - 1);
-  },
-  clickZero() {
-    const btnActions = document.querySelectorAll('.math-action');
-    const btnNumbers = document.querySelectorAll('.btn_number');
+  }
+  clickZero = () => {
+    const btnActions: any = document.querySelectorAll('.math-action');
+    const btnNumbers: any = document.querySelectorAll('.btn_number');
 
     mathState.btnValue.value = '';
     mathState.mathValue1.value = '';
@@ -42,13 +42,13 @@ export const btnClick = {
     this.enabled(btnActions);
     this.enabled(btnNumbers);
     mathState.mathOutput.value = ''
-  },
-  clickMath(target: EventTarget | null) {
+  }
+  clickMath = (target: EventTarget | null): void => {
     // переделать? нашел решение в qwen
     // проверка на наличие события и пустоту value
     if (target && 'value' in target) {
       const val = (target as HTMLInputElement).value
-      const btnActions: NodeList = document.querySelectorAll('.math-action');
+      const btnActions: any = document.querySelectorAll('.math-action');
 
       mathState.mathAction.value = val;
       mathState.mathValue1.value = mathState.btnValue.value;
@@ -56,15 +56,15 @@ export const btnClick = {
       mathState.mathOutput.value += `${mathState.mathValue1.value}${mathState.mathAction.value}`;
       this.disabled(btnActions)
     }
-  },
-  enabled(items:any) {
+  }
+  enabled(items: NodeListOf<HTMLElement>): void {
     // Типы!!!
     items.forEach(function (item: HTMLElement) {
       item.classList.remove('btn-disabled');
       item.removeAttribute('disabled');
     });
-  },
-  disabled(items:NodeList) {
+  }
+  disabled(items: NodeListOf<HTMLElement>): void {
     // Типы!!!
     const itemsArr: HTMLElement[] = Array.from(items)
 
@@ -75,12 +75,14 @@ export const btnClick = {
   }
 }
 
-export function calculate(a: any, b: any, operator: any) {
-    switch (operator) {
-      case '+': return a + b;
-      case '-': return a - b;
-      case '*': return a * b;
-      case '/': return b !== 0 ? a / b : 'Деление на ноль';
-      default: return 'Ошибка';
-    }
+function calculate(a: any, b: any, operator: any) {
+  switch (operator) {
+    case '+': return a + b;
+    case '-': return a - b;
+    case '*': return a * b;
+    case '/': return b !== 0 ? a / b : 'Деление на ноль';
+    default: return 'Ошибка';
   }
+}
+
+export const click = new BtnClick();

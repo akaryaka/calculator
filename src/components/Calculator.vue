@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-  import { mathState } from '../constants';
-  import { btnClick } from '../composables/calculator';
+  import { click } from '../composables/calculator';
+import { mathState } from '../constants';
+  // import { btnClick } from '../composables/calculator';
   import Form from './Form.vue';
 </script>
 
@@ -12,7 +13,7 @@
         <div class="output">{{ mathState.mathOutput }}</div>
         <header class="calc__header">
           <div class="calc__header-input">{{ mathState.btnValue }}</div>
-          <button v-if="mathState.btnValue" @click="btnClick.removeNumber" class="btn delete">Удалить</button>
+          <button v-if="mathState.btnValue" @click="click.removeNumber" class="btn delete">Удалить</button>
         </header>
         <Form />
       </div>
