@@ -1,23 +1,6 @@
 <template>
   <form action="#" class="calc__main">
-    <Button @click="click.clickZero" class="btn_command" id="btn_zeroing" value="C"/>
-    <Button @click="click.clickMath" class="math-action" id="btn_percent" :disabled=!mathState.btnValue value="%" />
-    <Button @click="click.clickMath" class="math-action" value="/" />
-    <Button @click="click.refValue" class="btn_number" value="7" />
-    <Button @click="click.refValue" class="btn_number" value="8" />
-    <Button @click="click.refValue" class="btn_number" value="9" />
-    <Button @click="click.clickMath" class="math-action" value="*" />
-    <Button @click="click.refValue" class="btn_number" value="4" />
-    <Button @click="click.refValue" class="btn_number" value="5" />
-    <Button @click="click.refValue" class="btn_number" value="6" />
-    <Button @click="click.clickMath" class="math-action" value="-" />
-    <Button @click="click.refValue" class="btn_number" value="1" />
-    <Button @click="click.refValue" class="btn_number" value="2" />
-    <Button @click="click.refValue" class="btn_number" value="3" />
-    <Button @click="click.clickMath" class="math-action" value="+" />
-    <Button @click="click.refValue" class="btn_number" value="0" />
-    <Button @click="click.refValue" class="btn_number" value="." />
-    <Button @click="click.btnEqual" class="equal" id="btn_equal" value="=" />
+    <Button v-for="button in buttons" @click='button.method' :class='button.class' :id="button.id" :disabled='button.disabled' :value='button.value'/>
   </form>
 </template>
 
@@ -25,6 +8,27 @@
   import Button from './Button.vue';
   import { click } from '../composables/calculator';
   import { mathState } from '../constants';
+
+  const buttons = [
+    {method: click.clickZero, class: 'btn_command', id: 'btn_zeroing', disabled: false, value: 'C'},
+    {method: click.clickMath, class: 'math-action', id: 'btn_percent', disabled: !mathState.btnValue, value: '%'},
+    {method: click.clickMath, class: 'math-action', id: '', value: '/'},
+    {method: click.refValue, class: 'btn_number', id: '', value: '7'},
+    {method: click.refValue, class: 'btn_number', value: '8'},
+    {method: click.refValue, class: 'btn_number', value: '9'},
+    {method: click.clickMath, class: 'math-action', value: '*'},
+    {method: click.refValue, class: 'btn_number', value: '4'},
+    {method: click.refValue, class: 'btn_number', value: '5'},
+    {method: click.refValue, class: 'btn_number', value: '6'},
+    {method: click.clickMath, class: 'math-action', value: '-'},  
+    {method: click.refValue, class: 'btn_number', value: '1'},
+    {method: click.refValue, class: 'btn_number', value: '2'},
+    {method: click.refValue, class: 'btn_number', value: '3'},
+    {method: click.clickMath, class: 'math-action', value: '+'},  
+    {method: click.refValue, class: 'btn_number', value: '0'},
+    {method: click.refValue, class: 'btn_number', value: '.'},
+    {method: click.btnEqual, class: 'equal', id: 'btn_equal', value: '='},  
+  ]
 </script>
 
 <style lang="scss" scoped>
