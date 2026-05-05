@@ -1,3 +1,4 @@
+// import { buttons } from "../components/Form.vue";
 import { mathState } from "../constants";
 
 export class BtnClick {
@@ -50,22 +51,28 @@ export class BtnClick {
       const val = (target as HTMLInputElement).value
       const btnActions: any = document.querySelectorAll('.math-action');
 
-      mathState.mathAction.value = val;
-      mathState.mathValue1.value = mathState.btnValue.value;
-      mathState.btnValue.value = '';
-      mathState.mathOutput.value += `${mathState.mathValue1.value}${mathState.mathAction.value}`;
-      this.disabled(btnActions)
+      const btnActionsFilter: any = Array.from(btnActions).filter(el => el.id !== 'btn_percent')
+      if (val != '%') {
+        mathState.mathAction.value = val;
+        mathState.mathValue1.value = mathState.btnValue.value;
+        mathState.btnValue.value = '';
+        mathState.mathOutput.value += `${mathState.mathValue1.value}${mathState.mathAction.value}`;
+        
+        this.disabled(btnActionsFilter)
+        
+      } 
     }
   }
+  percent() {
+    
+  }
   enabled(items: NodeListOf<HTMLElement>): void {
-    // Типы!!!
     items.forEach(function (item: HTMLElement) {
       item.classList.remove('btn-disabled');
       item.removeAttribute('disabled');
     });
   }
   disabled(items: NodeListOf<HTMLElement>): void {
-    // Типы!!!
     const itemsArr: HTMLElement[] = Array.from(items)
 
     itemsArr.forEach(function(item: HTMLElement) {
@@ -81,6 +88,7 @@ function calculate(a: any, b: any, operator: any) {
     case '-': return a - b;
     case '*': return a * b;
     case '/': return b !== 0 ? a / b : 'Деление на ноль';
+    case '%': return a * b / 100;
     default: return 'Ошибка';
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <form action="#" class="calc__main">
-    <Button v-for="button in buttons" @click='button.method' :class='button.class' :id="button.id" :disabled='button.disabled' :value='button.value'/>
+    <Button v-for="button in buttons" @click='button.method' :class='button.class' :id="button.id" :value='button.value'/>
   </form>
 </template>
 
@@ -8,10 +8,11 @@
   import Button from './Button.vue';
   import { click } from '../composables/calculator';
   import { mathState } from '../constants';
+  import { ref } from 'vue';
 
-  const buttons = [
-    {method: click.clickZero, class: 'btn_command', id: 'btn_zeroing', disabled: false, value: 'C'},
-    {method: click.clickMath, class: 'math-action', id: 'btn_percent', disabled: !mathState.btnValue, value: '%'},
+  const buttons = ref([
+    {method: click.clickZero, class: 'btn_command', id: 'btn_zeroing', value: 'C'},
+    {method: click.clickMath, class: 'math-action percent', id: 'btn_percent', value: '%'},
     {method: click.clickMath, class: 'math-action', id: '', value: '/'},
     {method: click.refValue, class: 'btn_number', id: '', value: '7'},
     {method: click.refValue, class: 'btn_number', value: '8'},
@@ -28,7 +29,7 @@
     {method: click.refValue, class: 'btn_number', value: '0'},
     {method: click.refValue, class: 'btn_number', value: '.'},
     {method: click.btnEqual, class: 'equal', id: 'btn_equal', value: '='},  
-  ]
+  ])
 </script>
 
 <style lang="scss" scoped>

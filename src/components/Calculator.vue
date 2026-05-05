@@ -1,7 +1,6 @@
 <script lang="ts" setup>
   import { click } from '../composables/calculator';
-import { mathState } from '../constants';
-  // import { btnClick } from '../composables/calculator';
+  import { mathState } from '../constants';
   import Form from './Form.vue';
 </script>
 
