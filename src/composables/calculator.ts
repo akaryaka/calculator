@@ -50,6 +50,7 @@ export class BtnClick {
     if (target && 'value' in target) {
       const val = (target as HTMLInputElement).value
       const btnActions: any = document.querySelectorAll('.math-action');
+      // const btnPercent: any = document.querySelector('.percent');
 
       const btnActionsFilter: any = Array.from(btnActions).filter(el => el.id !== 'btn_percent')
       if (val != '%') {
@@ -59,8 +60,17 @@ export class BtnClick {
         mathState.mathOutput.value += `${mathState.mathValue1.value}${mathState.mathAction.value}`;
         
         this.disabled(btnActionsFilter)
-        
-      } 
+      } else {
+        if (mathState.mathAction.value == '*' && mathState.btnValue.value != '') {
+          mathState.btnValue.value = String(Number(mathState.mathValue1.value) * Number(mathState.btnValue.value) / 100)
+        } else if (mathState.mathAction.value == '+' && mathState.btnValue.value != '') {
+          mathState.btnValue.value = String(Number(mathState.mathValue1.value) + Number(mathState.mathValue1.value)*Number(mathState.btnValue.value) / 100)
+        } else if (mathState.mathAction.value == '-' && mathState.btnValue.value != '') {
+          mathState.btnValue.value = String(Number(mathState.mathValue1.value) - Number(mathState.mathValue1.value)*Number(mathState.btnValue.value) / 100)
+        } else if (mathState.mathAction.value == '/' && mathState.btnValue.value != '') {
+          mathState.btnValue.value = String(Number(mathState.mathValue1.value) / Number(mathState.btnValue.value) / 100)
+        }        
+      }
     }
   }
   percent() {
