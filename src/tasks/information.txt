@@ -1,11 +1,20 @@
 узнать
 - как упростить работу с атрибутами по условию
-- зачем использовать деструктуризацию
 - философия vue, лучшие практики
 - нэйминг компонентов 
 - подробно прочитать про фильтрацию массивов
 
-узнал 
+узнал
+// оптимизация calculator.ts
+const result = computed(() => {
+  if (!mathState.btnValue.value) return '';
+  return calculatePercentOperation(
+    mathState.mathValue1.value,
+    mathState.btnValue.value,
+    mathState.mathAction.value
+  );
+}); 
+...
 - добавление сниппета для создания базового шаблона
   Самый распространенный способ — настроить User Snippets в VS Code.
   Ctrl+Shift+P -> Snippets -> vue.json/vue

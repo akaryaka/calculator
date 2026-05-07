@@ -1,7 +1,8 @@
-// import { buttons } from "../components/Form.vue";
 import { mathState } from "../constants";
 
 export class BtnClick {
+  // constructor() {}
+
   refValue(target: EventTarget | null): void {
     if (target && 'value' in target) {
       const val = (target as HTMLInputElement).value
@@ -21,14 +22,14 @@ export class BtnClick {
     if (mathState.mathValue2.value.trim() != '') {
       mathState.mathEqual.value = Number(mathState.mathValue1.value) * Number(mathState.mathValue2.value);
       mathState.btnValue.value = calculate(Number(mathState.mathValue1.value), Number(mathState.mathValue2.value), mathState.mathAction.value);
+      mathState.mathOutput.value += `${mathState.mathValue2.value}=${calculate(Number(mathState.mathValue1.value), Number(mathState.mathValue2.value), mathState.mathAction.value)}`;
+      this.disabled(btnNumbers);
     } else {
       alert('Пусто!');
     }
 
-    this.disabled(btnNumbers);
-
+    
     mathState.btnValue.value = '';
-    mathState.mathOutput.value += `${mathState.mathValue2.value}=${calculate(Number(mathState.mathValue1.value), Number(mathState.mathValue2.value), mathState.mathAction.value)}`;
   }
   removeNumber(): void {
     mathState.btnValue.value = mathState.btnValue.value.slice(0, mathState.btnValue.value.length - 1);
@@ -50,10 +51,9 @@ export class BtnClick {
     if (target && 'value' in target) {
       const val = (target as HTMLInputElement).value
       const btnActions: any = document.querySelectorAll('.math-action');
-      // const btnPercent: any = document.querySelector('.percent');
 
       const btnActionsFilter: any = Array.from(btnActions).filter(el => el.id !== 'btn_percent')
-      if (val != '%') {
+      if (val != '%' && mathState.btnValue.value != '') {
         mathState.mathAction.value = val;
         mathState.mathValue1.value = mathState.btnValue.value;
         mathState.btnValue.value = '';
@@ -72,9 +72,6 @@ export class BtnClick {
         }        
       }
     }
-  }
-  percent() {
-    
   }
   enabled(items: NodeListOf<HTMLElement>): void {
     items.forEach(function (item: HTMLElement) {
@@ -98,7 +95,6 @@ function calculate(a: any, b: any, operator: any) {
     case '-': return a - b;
     case '*': return a * b;
     case '/': return b !== 0 ? a / b : 'Деление на ноль';
-    case '%': return a * b / 100;
     default: return 'Ошибка';
   }
 }
