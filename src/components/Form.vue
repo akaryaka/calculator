@@ -7,7 +7,6 @@
 <script setup lang="ts">
   import Button from './Button.vue';
   import { click } from '../composables/calculator';
-  import { mathState } from '../constants';
   import { ref } from 'vue';
 
   const buttons = ref([

@@ -1,8 +1,6 @@
 import { mathState } from "../constants";
 
 export class BtnClick {
-  // constructor() {}
-
   refValue(target: EventTarget | null): void {
     if (target && 'value' in target) {
       const val = (target as HTMLInputElement).value
