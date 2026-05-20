@@ -2,6 +2,7 @@
   import { click } from '../composables/calculator';
   import { mathState } from '../constants';
   import Form from './Form.vue';
+  import HistoryActions from './HistoryActions.vue';
 </script>
 
 <template>
@@ -18,6 +19,7 @@
       </div>
     </div>
   </div>
+  <HistoryActions />
 </template>
 
 <style lang="scss">
