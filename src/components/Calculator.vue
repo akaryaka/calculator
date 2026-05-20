@@ -17,9 +17,10 @@
         </header>
         <Form />
       </div>
+      <HistoryActions />
     </div>
   </div>
-  <HistoryActions />
+  
 </template>
 
 <style lang="scss">
@@ -42,6 +43,7 @@
     padding: 35px;
     border-radius: 30px;
     display: grid;
+    margin-bottom: 30px;
     &__header {
       width: 100%;
       height: 50px;
