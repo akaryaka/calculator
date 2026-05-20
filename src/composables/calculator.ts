@@ -1,4 +1,4 @@
-import { mathState } from "../constants";
+import { mathState, history } from "../constants";
 
 export class BtnClick {
   refValue(target: EventTarget | null): void {
@@ -22,10 +22,10 @@ export class BtnClick {
       mathState.btnValue.value = calculate(Number(mathState.mathValue1.value), Number(mathState.mathValue2.value), mathState.mathAction.value);
       mathState.mathOutput.value += `${mathState.mathValue2.value}=${calculate(Number(mathState.mathValue1.value), Number(mathState.mathValue2.value), mathState.mathAction.value)}`;
       this.disabled(btnNumbers);
+      history.value.push(mathState.mathOutput.value);
     } else {
       alert('Пусто!');
     }
-
     
     mathState.btnValue.value = '';
   }
