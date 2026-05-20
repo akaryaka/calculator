@@ -8,3 +8,5 @@ export const mathState = {
     mathEqual: ref(0),
     mathOutput: ref(''),
 }
+
+export const history = ref([]);
