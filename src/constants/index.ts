@@ -9,4 +9,4 @@ export const mathState = {
     mathOutput: ref(''),
 }
 
-export const history = ref([]);
+export const history: any = ref<any>([]);
