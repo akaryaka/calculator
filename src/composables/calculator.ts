@@ -50,14 +50,17 @@ export class BtnClick {
       const val = (target as HTMLInputElement).value
       const btnActions: any = document.querySelectorAll('.math-action');
 
-      const btnActionsFilter: any = Array.from(btnActions).filter(el => el.id !== 'btn_percent')
+      const btnActionsFilter = Array.from<HTMLElement>(btnActions).filter(el => el.id !== 'btn_percent');
+      // const btnActionsFilter: any = Array.from(btnActions).filter(el => el.id !== 'btn_percent') / qwen:)
       if (val != '%' && mathState.btnValue.value != '') {
         mathState.mathAction.value = val;
         mathState.mathValue1.value = mathState.btnValue.value;
         mathState.btnValue.value = '';
         mathState.mathOutput.value += `${mathState.mathValue1.value}${mathState.mathAction.value}`;
         
-        this.disabled(btnActionsFilter)
+      // this.disabled(btnActionsFilter) / qwen:)
+      this.disabled(btnActionsFilter as unknown as NodeListOf<HTMLElement>);
+      // this.disabled(btnActionsFilter);
       } else {
         if (mathState.mathAction.value == '*' && mathState.btnValue.value != '') {
           mathState.btnValue.value = String(Number(mathState.mathValue1.value) * Number(mathState.btnValue.value) / 100)
