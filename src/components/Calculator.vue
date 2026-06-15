@@ -31,6 +31,16 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    @media(max-width: 575px) {
+      width: 100%;
+      padding: 0 40px;
+    }
+    @media(max-width: 464px) {
+      padding: 15px 20px;
+    }
+    @media(max-width: 375px) {
+      padding: 15px 10px;
+    }
   }
 
   .title {
@@ -44,12 +54,24 @@
     border-radius: 30px;
     display: grid;
     margin-bottom: 30px;
+    @media(max-width: 575px) {
+      width: 100%;
+    }
+    @media(max-width: 464px) {
+      padding: 25px;
+    }
+    @media(max-width: 375px) {
+      padding: 15px;
+    }
     &__header {
       width: 100%;
       height: 50px;
       margin-bottom: 50px;
       display: flex;
       justify-content: space-between;
+      @media(max-width: 375px) {
+        margin-bottom: 35px;
+      }
       &-input {
         width: 100px;
         padding: 0 10px;
@@ -74,6 +96,13 @@
       cursor: pointer;
       padding: 10px;
       font-size: 20px;
+      @media(max-width: 464px) {
+        padding: 8px;
+        font-size: 16px;
+      }
+      @media(max-width: 375px) {
+        padding: 8px 15px;
+      }
     }
   }
 

@@ -27,6 +27,6 @@
 <style scoped>
   td, th {
     color: #000;
-    padding: 10px 15px; /* 10px сверху/снизу и 15px слева/справа */
+    padding: 10px 15px; 
 }
 </style>
